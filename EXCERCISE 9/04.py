@@ -1,14 +1,18 @@
 import os
 import shutil
 
-def copy_to_subfolder():
-    src = 'testfile.txt'
-    new_folder = 'copied_here'
+def move_file_to_folder():
+    filename = input("Enter the file name to copy: ")
+    folder = input("Enter the name of the folder to copy into: ")
 
-    if not os.path.exists(new_folder):
-        os.mkdir(new_folder)
+    if not os.path.exists(filename):
+        print("The file '" + filename + "' was not found.")
+        return
 
-    shutil.copy(src, new_folder + '/' + src)
-    print('Copied successfully')
+    if not os.path.exists(folder):
+        os.mkdir(folder)
 
-copy_to_subfolder()
+    shutil.copy(filename, os.path.join(folder, filename))
+    print("File copied to '" + folder + "' folder.")
+
+move_file_to_folder()
