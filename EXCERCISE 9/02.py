@@ -1,17 +1,18 @@
 import pandas as pd
-def read_excel_and_dict():
-    data = pd.read_excel('marksheet.xlsx')
-    info = {}
-    for i, row in data.iterrows():
-        total = row['sub1'] + row['sub2'] + row['sub3']
-        info[row['rollno']] = {
-            'name': row['name'],
-            'marks': [row['sub1'], row['sub2'], row['sub3']],
-            'total': total
-        }
-    for r in info:
-        print('Roll:', r)
-        print(info[r])
-        print()
-read_excel_and_dict()
+import os
 
+if os.path.exists('students_data.xlsx'):
+    df = pd.read_excel('students_data.xlsx')
+else:
+    print("'students_data.xlsx' file not found.")
+    df = pd.DataFrame()
+
+students_list = df.to_dict(orient='records') if not df.empty else []
+
+for student in students_list:
+    m1 = student.get('marks_subject1', 0)
+    m2 = student.get('marks_subject2', 0)
+    m3 = student.get('marks_subject3', 0)
+    student['total'] = m1 + m2 + m3
+
+print(students_list)
