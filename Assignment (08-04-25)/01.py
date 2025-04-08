@@ -9,7 +9,7 @@ def name_count(filename,name):
     name=name.lower()
     text=text.lower()
     total=text.count(name)
-    print("Your name appeared",total,"times.")
+    print("Your name appeared",total,"times")
     return total
 
 file_name=input("Enter file name: ")
